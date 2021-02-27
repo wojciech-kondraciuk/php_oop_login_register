@@ -5,75 +5,63 @@ namespace App\Controllers;
 use \Core\View;
 use App\Models\Registration;
 use App\Helpers\Validation;
+use App\Helpers\Mailer;
 /**
  * Register controller
  */
 class Register extends \Core\Controller {
 
     /**
-     * Show the index page
-     *
      * @return void
      */
 
-    public function test_input($data) {
+    private function test_input(string $data): string {
         $data = trim($data);
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
         return $data;
       }
 
-    public function index() {
+    public function index(): void {
 
-        $errors = [];
+        $val = new Validation();
         $data = [];
+        $data['token'] = bin2hex(random_bytes(50));
+        $urlVerify = $_SERVER['DOMAIN'].'/verify_email?token='.$data['token'];
 
         if (isset($_POST['submit'])) {
     	
-            if(!preg_match('/^[a-zA-Z0-9]{5,}$/', $_POST['username'])) {
-                $errors['username'] = 'Username, alphanumeric & longer than or equals 5 chars';
-            } else {
+            if ($val->name('username')->value($_POST['username'])->pattern('alpha')->required()) {
                 $data['username'] = $this->test_input($_POST['username']);
             }
-
-            if (!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $_POST['password'])) {
-                $errors['password'] = 'Password must be 8-12 characters and 1 number ';
+            if ($val->name('email')->value($_POST['email'])->pattern('email')->required()){
+                $data['email'] = $this->test_input($_POST['email']); 
             }
-            else {
+            if ($val->name('password')->value($_POST['password'])->customPattern('[A-Za-z0-9-.;_!#@]{5,15}')->required()) {
                 $data['password'] = $this->test_input($_POST['password']);
             }
 
-            $pattern = "^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^"; 
-
-            if (!preg_match ($pattern, $_POST['email'])) {  
-                $errors['email'] = 'Incorrect email address'; 
-            } else {  
-                $data['email'] = $this->test_input($_POST['email']);  
-            }  
-
-            if (!$errors) {
-                 
+            if ($val->isSuccess()) {
                 try {
-                    
+
                     $register = new Registration($data);
                     $register->rgisterUser();
 
                     if ($register)
+                        
+                        $sendMail = new Mailer();
+                        $sendMail->send($data['email'], $urlVerify);
                         $data = [];
-                        echo 'Success';
 
                 } catch (Exception $e) {
                     echo 'Caught exception: ',  $e->getMessage(), "\n";
                 } 
-            } 
-
-          
+            }
         }
         View::renderTemplate('Home/form.html', [
             'data'    => $data,
-            'error' => $errors
+            'error' => $val->getErrors()
         ]);     
     }
 }
-
 

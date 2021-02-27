@@ -9,32 +9,35 @@ use PDO;
  */
 class Registration extends \Core\Model {
 
-    private $email;
-    private $username;
-    private $password;
+    private string $email;
+    private string $username;
+    private string $password;
+    private string $token;
     
-    function __construct($data) {
+    function __construct(array $data) {
         $this->email    = $data['email'];
         $this->username = $data['username'];
         $this->password = $data['password'];
-        $this->datetime = date('Y-m-d H:i:s');
+        $this->token    = $data['token'];
     }
 
-    function rgisterUser() {
+    function rgisterUser(): void {
 		
-		$sql = "INSERT INTO register (username, password, email, created_at) VALUES (:username,:password,:email,:created_at)";
-        
-		try{
-			
+		$sql = "INSERT INTO register (username, email, password, token, created_at) VALUES (:username,:email,:password,:token,:created_at)";
+		
+        try {
 			$hash = password_hash($this->password, PASSWORD_BCRYPT);
+            $datetime = date('Y-m-d H:i:s');
+
 			$query = static::getDB()->prepare($sql);
 			
 			$query->bindparam(":username", $this->username);
             $query->bindparam(":email", $this->email);
             $query->bindparam(":password", $hash);
-            $query->bindParam(':created_at', $this->datetime);
+            $query->bindParam(':created_at', $datetime);
+            $query->bindParam(':token', $this->token);
             $query->execute(); 
-				
+            
 		} catch (Exception $e) {
 			echo 'Caught exception: ',  $e->getMessage(), "\n";
 		}
