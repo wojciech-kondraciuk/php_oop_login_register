@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+    <h1>Register</h1>
+    <form method="post" action="/register">
+        Name:<br>
+        {{ error.username }}<br>
+        <input type="text" name="username" value="{{ data.username }}" >
+        <br>
+        Email:<br>
+        {{ error.email }}<br>
+        <input type="text" name="email" value="{{ data.email }}">
+        <br><br>
+        Password:<br>
+        {{ error.password }}<br>
+        <input type="password" name="password" value="{{ data.password }}">
+        <br><br>
+        <input type="submit" name="submit">
+    </form> 
+{% endblock %}

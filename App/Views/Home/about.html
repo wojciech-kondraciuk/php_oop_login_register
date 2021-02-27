@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+    <h1>About</h1>
+    <div>{{ name }}</div>
+    <ul>
+        {% for color in colours %}
+            <li>{{ color.name }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

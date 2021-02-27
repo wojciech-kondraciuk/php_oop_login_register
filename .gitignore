@@ -1,0 +1,6 @@
+/vendor/
+!cache/
+cache/*
+logs/*.log
+composer.lock
+.env
