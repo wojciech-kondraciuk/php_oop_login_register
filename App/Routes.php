@@ -12,7 +12,7 @@ $router->respondWithController('GET', '/about', 'About@index');
 $router->respondWithController('GET', '/register', 'Register@index');
 $router->respondWithController('POST', '/register', 'Register@index');
 
-$router->respondWithController('GET', '/verify_email', 'Mail@index');
+$router->respondWithController('GET', '/verify_email', 'verify@index');
 
 
 // Dispatch the router

@@ -17,7 +17,7 @@ class Update extends \Core\Model {
         $this->tablename = $tablename;
     }
 
-    function editData(int $id): int {
+    public function editData(int $id): int {
         try {
             $sql = "UPDATE $this->tablename SET ";
 
@@ -38,15 +38,16 @@ class Update extends \Core\Model {
 
             $query->execute();
 
-            return true;
+            return 1;
 
         } catch (Exception $e) {
 			echo 'Caught exception: ',  $e->getMessage(), "\n";
 		}
     }
 
-    public function existsToken(string $token): string {
-        $db = static::getDB();
-        //$stmt = $db->query('SELECT * FROM register WHERE token='$token' LIMIT 1')
+    public static function existsToken(string $token) {
+        $stmt = static::getDB()->prepare("SELECT id, verified FROM register WHERE token=:token LIMIT 1");
+        $stmt->execute(['token' => $token]); 
+        return $stmt->fetch();
     }
 }
