@@ -388,5 +388,11 @@ class Validation {
     public static function is_email($value){
         if(filter_var($value, FILTER_VALIDATE_EMAIL)) return true;
     }
-    
+
+    public function test_input(string $data): string {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+      }
 }

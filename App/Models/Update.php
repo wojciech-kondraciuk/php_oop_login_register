@@ -18,6 +18,7 @@ class Update extends \Core\Model {
     }
 
     public function editData(int $id): int {
+        
         try {
             $sql = "UPDATE $this->tablename SET ";
 
@@ -46,7 +47,7 @@ class Update extends \Core\Model {
     }
 
     public static function existsToken(string $token) {
-        $stmt = static::getDB()->prepare("SELECT id, verified FROM register WHERE token=:token LIMIT 1");
+        $stmt = static::getDB()->prepare("SELECT id, verified FROM users WHERE token=:token LIMIT 1");
         $stmt->execute(['token' => $token]); 
         return $stmt->fetch();
     }

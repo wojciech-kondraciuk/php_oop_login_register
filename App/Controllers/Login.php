@@ -3,12 +3,10 @@
 namespace App\Controllers;
 
 use \Core\View;
-use App\Models\Registration;
 use App\Helpers\Validation;
-use App\Helpers\Mailer;
-use App\Helpers\Alerts;
+use App\Models\LoginUser;
 
-class Register extends \Core\Controller {
+class Login extends \Core\Controller {
 
     /**
      * @return void
@@ -18,16 +16,11 @@ class Register extends \Core\Controller {
 
         $val = new Validation();
         $data = [];
-        $data['token'] = bin2hex(random_bytes(50));
-        $urlVerify = $_SERVER['DOMAIN'].'/verify_email?token='.$data['token'];
 
         if (isset($_POST['submit'])) {
-    	
+
             if ($val->name('username')->value($_POST['username'])->pattern('alpha')->required()) {
                 $data['username'] = $val->test_input($_POST['username']);
-            }
-            if ($val->name('email')->value($_POST['email'])->pattern('email')->required()){
-                $data['email'] = $val->test_input($_POST['email']); 
             }
             if ($val->name('password')->value($_POST['password'])->customPattern('[A-Za-z0-9-.;_!#@]{5,15}')->required()) {
                 $data['password'] = $val->test_input($_POST['password']);
@@ -35,26 +28,17 @@ class Register extends \Core\Controller {
 
             if ($val->isSuccess()) {
                 try {
-
-                    $register = new Registration($data);
-                    $register->rgisterUser();
-
-                    if ($register)
-                        
-                        //$sendMail = new Mailer();
-                        //$sendMail->send($data['email'], $urlVerify);
-                        $data = [];
-                        Alerts::successAlert("Success","This is a Bootstrap danger alert");
-
+                    $login = new LoginUser($data);
+                    $login->loginUser();
                 } catch (Exception $e) {
                     echo 'Caught exception: ',  $e->getMessage(), "\n";
                 } 
             }
         }
-        View::renderTemplate('Home/registerForm.html', [
+
+        View::renderTemplate('Home/loginForm.html', [
             'data'    => $data,
             'error' => $val->getErrors()
-        ]);     
+        ]);
     }
 }
-

@@ -4,10 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
+    
+    <link type="text/css" rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
+
+    <nav>
+        <a href="/login">Logowanie</a><br>
+        <a href="/register">rejestracja</a><br>
+        <a href="/panel">Panel</a>
+    </nav>
+
     {% block body %}
     {% endblock %}
+
+<script src="static/js/scripts.js"></script>
 </body>
 </html>
 {% endhtmlcompress %}

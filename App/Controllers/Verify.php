@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Controllers;
+
+use \Core\View;
 use App\Models\Update;
-/**
- * Verify controller
- *
- */
+use App\Helpers\Alerts;
+
 class Verify extends \Core\Controller {
 
     /**
@@ -20,13 +20,14 @@ class Verify extends \Core\Controller {
         
             if ($update) {
     
-                $up = new Update(['verified'=> 1], 'register');
+                $up = new Update(['verified'=> 1], 'users');
                 $up->editData($update['id']);
     
-                echo 'Success, możesz sie zalogować';
+                Alerts::successAlert("Success","This is a Bootstrap danger alert");
             } else {
-                echo "token jest nieaktualny";
+                Alerts::dangerAlert("Danger!","This is a Bootstrap danger alert");
             }
         }
+        View::renderTemplate('base.html'); 
     }
 }
