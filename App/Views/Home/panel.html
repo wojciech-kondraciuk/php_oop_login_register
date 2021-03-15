@@ -1,2 +1,71 @@
+{% extends "base.html" %}
+
+{% block body %}
+
 <h1>Panel admin</h1>
 <a href="/login"> back to login</a>
+<a href="/logout"> logout</a>
+
+<h1>Links</h1>
+
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">link</th>
+        <th scope="col">name</th>
+        <th scope="col">tag</th>
+        <th scope="col">action</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for item in showLinks %}
+      <tr>
+        <th scope="row">{{ item.id }}</th>
+        <td><a href="{{ item.link }}" target="_blank">{{ item.link }}</a></td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.tag }}</td>
+        <td>
+            <button>kopiuj do schowka</button>
+            <a href="/panel/delete/{{ item.id }}" target="_blank">Del</a>
+            <a href="/panel/edit/{{ item.id }}" target="_blank">Edit</a>
+        </td>
+      </tr>
+    {% endfor %}
+    <tr>
+      <td colspan="5">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+              Add link
+            </button>
+      </td>
+  </tr>
+    </tbody>
+  </table>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="/panel" method="post">
+            <div class="modal-body">
+                <input type="text" name="link"><br>
+                <input type="text" name="name">
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <input type="submit" name="submit" class="btn btn-primary" value="save" />
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

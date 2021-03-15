@@ -4,3 +4,4 @@ cache/*
 logs/*.log
 composer.lock
 .env
+test.php
