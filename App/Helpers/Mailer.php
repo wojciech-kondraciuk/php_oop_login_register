@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Helpers;
+use App\Helpers\Alerts;
 
 class Mailer {
     /**
@@ -16,9 +17,9 @@ class Mailer {
         $body = "<h1>siema</h1><p><strong>This is strong text</strong> while this is not.</p><a href='http://$urlVerify'>verify email</a>";
         
         if (mail($to_email, $subject, $body, $headers)) {
-            echo "Email successfully sent to $to_email...";
+            Alerts::successAlert("Success","Email successfully sent to $to_email...");
         } else {
-            echo "Email sending failed...";
+            Alerts::dangerAlert("Fail","Email sending failed...");
         }
     }
 }

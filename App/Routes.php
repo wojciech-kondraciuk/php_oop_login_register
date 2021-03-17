@@ -13,6 +13,9 @@ $router->respondWithController('POST', '/register', 'Register@index');
 
 $router->respondWithController('GET', '/verify_email', 'verify@index');
 
+$router->respond('GET', '/', function () {
+    View::renderTemplate('index.html');
+});
 
 if (isset($_SESSION['username'])) {
     $router->respondWithController('GET', '/panel', 'Panel@index');

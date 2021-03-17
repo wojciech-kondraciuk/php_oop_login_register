@@ -41,8 +41,8 @@ class Register extends \Core\Controller {
 
                     if ($register)
                         
-                        //$sendMail = new Mailer();
-                        //$sendMail->send($data['email'], $urlVerify);
+                        $sendMail = new Mailer();
+                        $sendMail->send($data['email'], $urlVerify);
                         $data = [];
                         Alerts::successAlert("Success","This is a Bootstrap danger alert");
 

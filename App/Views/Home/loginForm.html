@@ -1,22 +1,48 @@
 {% extends "base.html" %}
 
 {% block body %}
-
-    <h1>Login</h1>
-
-    <ul>
-        {% for err in error %}
-            <li>{{ err }}</li>
-        {% endfor %}
-    </ul>
-
+<div class="jumbotron">
+<h1>Login</h1>
+<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam, sint aliquam. Quis, a repellat error optio autem atque cupiditate facilis.</p>
+{% if error %}
+    <div class="alert alert-danger" role="alert">
+        <ul class="text-danger">
+            {% for err in error %}
+                <li>{{ err }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
     <form method="post">
-        Email:<br>
-        <input type="text" name="username" value="{{ data.username }}">
-        <br><br>
-        Password:<br>
-        <input type="password" name="password" value="{{ data.password }}">
-        <br><br>
-        <input type="submit" name="submit" value="Zaloguj">
-    </form> 
+        <div class="row">
+            <div class="form-group col-xs-5 col-lg-4">
+                <label for="InputEmail">Email address</label>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="InputEmail" 
+                    name="username" 
+                    value="{{ data.username }}"
+                >
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-5 col-lg-4">
+                <label for="InputPassword">Password</label>
+                <input 
+                    type="password" 
+                    class="form-control" 
+                    id="InputPassword" 
+                    name="password" 
+                    value="{{ data.password }}"
+                >
+                <small id="emailHelp" class="form-text text-muted">user/user12</small>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" name="submit">Log in</button>
+
+    </form>
+</div>
 {% endblock %}
+

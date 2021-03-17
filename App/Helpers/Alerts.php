@@ -10,7 +10,7 @@ class Alerts {
    */
   public static function successAlert($bold, $message) {
     echo '<div class="container">
-            <div class="alert alert-success fade in">
+            <div class="alert alert-success">
               <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 <strong>'.$bold.'</strong> '.$message.'
             </div>
@@ -24,7 +24,7 @@ class Alerts {
    */
   public static function dangerAlert($bold, $message) {
     echo '<div class="container">
-            <div class="alert alert-danger fade in">
+            <div class="alert alert-danger">
               <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 <strong>'.$bold.'</strong> '.$message.'
             </div>

@@ -1,3 +1,4 @@
+//form valid
 (function () {
     'use strict'
     let forms = document.querySelectorAll('.needs-validation')
@@ -13,3 +14,15 @@
             }, false)
         })
 })()
+
+//active menu
+
+const url = window.location.href;
+const page = url.substr(url.lastIndexOf('/') + 1);
+const path = page ? page : '/';
+
+if (path == '/') {
+    $("ul li a[href='/']").addClass('active');
+}
+
+$("ul li a[href*=" + path + "]").addClass('active');

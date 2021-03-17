@@ -5,3 +5,4 @@ logs/*.log
 composer.lock
 .env
 test.php
+images
