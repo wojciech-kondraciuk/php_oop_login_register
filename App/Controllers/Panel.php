@@ -3,9 +3,13 @@
 namespace App\Controllers;
 
 use \Core\View;
+use \Core\Router;
 use App\Models\Display;
 use App\Models\Add;
+use App\Models\Delete;
 use App\Helpers\Validation;
+
+
 
 class Panel extends \Core\Controller {
 
@@ -49,19 +53,22 @@ class Panel extends \Core\Controller {
 
         $show = new Display('links');
         $showLinks = $show->getAllData();
-        $send = false;
 
         if (isset($_POST['submit'])) {
             $this->addLink();
-            $showLinks = $show->getAllData();
-            $send = true;
-        } else {
-            $send = false;
+            header("Location:panel");
+            exit();
+        }
+
+        if (isset($_GET['delete'])) {
+            $del = new Delete('links');
+            $del->deleteById($_GET['delete']);
+            header("Location:panel");
+            exit();
         }
 
         View::renderTemplate('home/panel.html', [
-            'showLinks' => $showLinks,
-            'send' => $send
+            'showLinks' => $showLinks
         ]); 
     }
 }

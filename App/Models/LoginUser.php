@@ -22,7 +22,6 @@ class LoginUser extends \Core\Model {
         $sql = "SELECT * FROM users 
                 WHERE 
                 username = :username";
-
 		try {
 
             $query = static::getDB()->prepare($sql);

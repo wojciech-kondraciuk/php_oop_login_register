@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/style.css" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="d-flex flex-grow-1">
+            <span class="w-100 d-lg-none d-block"></span>
+            <a class="navbar-brand d-none d-lg-inline-block" href="#"><img src="static/images/logo.png" alt="logo"></a>
+            <a class="navbar-brand-two mx-auto d-lg-none d-inline-block" href="#">
+                <img src="static/images/logo.png" alt="logo">
+            </a>
+            <div class="w-100 text-right">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </div>
+        <div class="collapse navbar-collapse flex-grow-1 text-right" id="myNavbar">
+            <ul class="navbar-nav ml-auto flex-nowrap" id="nav">
+                <li class="nav-item">
+                    <a href="/" class="nav-link m-2 menu-item {% if activePage == '' %} active {% endif %}">Home</a>
+                </li>
+            {% if username %}
+                <li class="nav-item">
+                    <a href="/panel" class="nav-link m-2 menu-item {% if activePage == 'panel' %} active {% endif %}">Panel</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link m-2 menu-item">
+                        Logged in as: <strong>{{ type }}</strong>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/logout" class="nav-link m-2 menu-item btn btn-danger">Logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a href="/login" class="nav-link m-2 menu-item {% if activePage == 'login' %} active {% endif %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/register" class="nav-link m-2 menu-item {% if activePage == 'register' %} active {% endif %}">Register</a>
+                </li>
+            {% endif %}
+            </ul>
+        </div>
+    </nav>
+    

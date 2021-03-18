@@ -44,12 +44,3 @@ $whoops->register();
 $whoops->pushHandler(new Whoops\Handler\PrettyPageHandler());
 
 require_once('../App/Routes.php');
-
-/*
-$loader = new \Twig\Loader\FilesystemLoader('../App/views');
-$twig = new \Twig\Environment($loader);
-
-$template = $twig->load('components/nav.html');
-
-echo $template->render(['the' => 'variables']);
-*/

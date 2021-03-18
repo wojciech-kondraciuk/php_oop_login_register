@@ -2,29 +2,15 @@
 
 {% block body %}
 
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Zalogowany jako: <strong>test</strong></a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0 mx-auto">
+<div class="container">
+  <div class="d-flex justify-content-between">
+    <h1 class="mb-20">Links</h1>
+    <form class="form-inline">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
-      <a class="btn btn-danger" href="/logout">Logout</a>
   </div>
-</nav>
-
-
-<h1 class="mb-20">Links</h1>
-
+</div>
 <table class="table table-striped">
     <thead>
       <tr>
@@ -43,22 +29,20 @@
         <td>{{ item.name }}</td>
         <td>{{ item.tag }}</td>
         <td>
-            <button>kopiuj do schowka</button>
-            <a href="/panel/delete/{{ item.id }}" target="_blank">Del</a>
-            <a href="/panel/edit/{{ item.id }}" target="_blank">Edit</a>
+            <a onClick="return confirm('Are you sure you want to delete?')" class="btn btn-danger" href="/panel?delete={{ item.id }}" >Del</a>
+            <a class="btn btn-success" href="/panel/edit/{{ item.id }}" data-toggle="modal" data-target="#exampleModal">Edit</a>
         </td>
       </tr>
     {% endfor %}
-    <tr>
-      <td colspan="5">
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-              Add link
-            </button>
-      </td>
-  </tr>
+      <tr>
+        <td colspan="5">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add link</button>
+        </td>
+      </tr>
     </tbody>
-  </table>
+</table>
 
-  {% include './components/modal.html' %}
+{% include './components/modal.html' %}
 
 {% endblock %}
+
