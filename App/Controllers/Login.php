@@ -36,7 +36,7 @@ class Login extends \Core\Controller {
             }
         }
 
-        View::renderTemplate('Home/loginForm.html', [
+        View::renderTemplate('home/loginForm.html', [
             'data'    => $data,
             'error' => $val->getErrors()
         ]);

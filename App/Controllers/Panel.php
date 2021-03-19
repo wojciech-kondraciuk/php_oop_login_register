@@ -67,6 +67,7 @@ class Panel extends \Core\Controller {
             exit();
         }
 
+        print_r($_GET);
         View::renderTemplate('home/panel.html', [
             'showLinks' => $showLinks
         ]); 

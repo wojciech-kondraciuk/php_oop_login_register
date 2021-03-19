@@ -34,12 +34,13 @@ class LoginUser extends \Core\Model {
                 if (password_verify($this->password , $result['password'])) {
 					$_SESSION['username'] = $result['username'];
 					$_SESSION['type'] = $result['type'];
-                    ob_start();
                     header("Location:panel");
                     exit();
-                } 
+                } else {
+                    Alerts::dangerAlert("Error","Login or password incorrect");
+                }
 	        } else {
-                Alerts::dangerAlert("Error","User not found");
+                Alerts::dangerAlert("Error","No user");
             }
 		} catch (Exception $e) {
 			echo 'Caught exception: ',  $e->getMessage(), "\n";

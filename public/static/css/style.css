@@ -5,3 +5,8 @@ ul {
 .alert {
     z-index: 9999;
 }
+
+.navbar {
+    margin-bottom: 20px;
+}
+

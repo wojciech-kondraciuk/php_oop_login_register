@@ -7,7 +7,7 @@ use \Core\View;
 $router = new Core\Router();
 
 //add globale varialbels
-$loader = new \Twig\Loader\FilesystemLoader('../App/views');
+$loader = new \Twig\Loader\FilesystemLoader('../App/Views');
 $twig = new \Twig\Environment($loader);
 echo $twig->render('components/header.html',[
     'activePage' => $activePage,
@@ -26,6 +26,8 @@ $router->respondWithController('GET', '/verify_email', 'verify@index');
 $router->respond('GET', '/', function () {
     View::renderTemplate('index.html');
 });
+
+
 
 
 if (isset($_SESSION['username'])) {

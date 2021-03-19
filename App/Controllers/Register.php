@@ -6,7 +6,6 @@ use \Core\View;
 use App\Models\Registration;
 use App\Helpers\Validation;
 use App\Helpers\Mailer;
-use App\Helpers\Alerts;
 
 class Register extends \Core\Controller {
 
@@ -44,14 +43,13 @@ class Register extends \Core\Controller {
                         $sendMail = new Mailer();
                         $sendMail->send($data['email'], $urlVerify);
                         $data = [];
-                        Alerts::successAlert("Success","This is a Bootstrap danger alert");
 
                 } catch (Exception $e) {
                     echo 'Caught exception: ',  $e->getMessage(), "\n";
                 } 
             }
         }
-        View::renderTemplate('Home/registerForm.html', [
+        View::renderTemplate('home/registerForm.html', [
             'data'    => $data,
             'error' => $val->getErrors()
         ]);     

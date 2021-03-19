@@ -14,3 +14,10 @@
             }, false)
         })
 })()
+
+
+const queryString = window.location.search.replace(/[0-9?=]/g, '');
+
+if (queryString == "edit") {
+    $('#exampleModal').modal('show');
+}

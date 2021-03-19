@@ -23,9 +23,9 @@ class Verify extends \Core\Controller {
                 $up = new Update(['verified'=> 1], 'users');
                 $up->editData($update['id']);
     
-                Alerts::successAlert("Success","This is a Bootstrap danger alert");
+                Alerts::successAlert("Success!","Verify your emaile <br><br> <a href='/login' class='btn btn-success'>Back to login</a>");
             } else {
-                Alerts::dangerAlert("Danger!","This is a Bootstrap danger alert");
+                Alerts::dangerAlert("Error!","Email address has not been verified");
             }
         }
         View::renderTemplate('base.html'); 
