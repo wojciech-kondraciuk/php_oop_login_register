@@ -43,17 +43,12 @@
     {% endfor %}
       <tr>
         <td colspan="5">
-            <button 
-              type="button" 
+            <a 
+              href="/panel?add"
               class="btn btn-primary" 
-              data-toggle="modal" 
-              data-target="#exampleModal"
-            >Add link</button>
+            >Add link</a>
         </td>
       </tr>
     </tbody>
 </table>
-
-{% include './components/modal.html' %}
-
 {% endblock %}

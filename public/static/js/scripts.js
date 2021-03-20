@@ -18,6 +18,6 @@
 
 const queryString = window.location.search.replace(/[0-9?=]/g, '');
 
-if (queryString == "edit") {
+if (queryString == "edit" || queryString == "add") {
     $('#exampleModal').modal('show');
 }

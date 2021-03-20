@@ -7,9 +7,8 @@ use \Core\Router;
 use App\Models\Display;
 use App\Models\Add;
 use App\Models\Delete;
+use App\Models\Update;
 use App\Helpers\Validation;
-
-
 
 class Panel extends \Core\Controller {
 
@@ -22,17 +21,10 @@ class Panel extends \Core\Controller {
         $val = new Validation();
         $data = [];
 
-        if ($val->name('link')->value($_POST['link'])->required()) {
-            $data['link'] = $val->test_input($_POST['link']);
-        }
-
-        if ($val->name('name')->value($_POST['name'])->required()) {
-            $data['name'] = $val->test_input($_POST['name']);
-        }
-
-        if ($val->name('tag')->value($_POST['tag'])->required()) {
-            $data['tag'] = $val->test_input($_POST['tag']);
-        }
+        $data['link'] = $val->test_input($_POST['link']);
+        $data['name'] = $val->test_input($_POST['name']);
+        $data['tag'] = $val->test_input($_POST['tag']);
+        
 
         if ($val->isSuccess()) {
             try {
@@ -50,24 +42,60 @@ class Panel extends \Core\Controller {
     }
 
     public function index(): void {
-
+        $val = new Validation();
+        $data = [];
         $show = new Display('links');
         $showLinks = $show->getAllData();
 
-        if (isset($_POST['submit'])) {
+        //add
+        if (isset($_POST['add'])) {
             $this->addLink();
             header("Location:panel");
-            exit();
+            exit;
         }
-
+        //delete
         if (isset($_GET['delete'])) {
             $del = new Delete('links');
             $del->deleteById($_GET['delete']);
             header("Location:panel");
-            exit();
+            exit;
+        }
+        //edit
+        if (isset($_GET['edit'])) {
+            $row = new Display('links');
+            $update = $row->getRecordByID($_GET['edit']);
+
+            View::renderTemplate('components/modal.html', [
+                'header' => 'Edit item',
+                'items' => $update,
+                'action' => 'edit'
+            ]); 
         }
 
-        print_r($_GET);
+        if (isset($_POST['edit'])) {
+            $data['link'] = $val->test_input($_POST['link']);
+            $data['name'] = $val->test_input($_POST['name']);
+            $data['tag'] = $val->test_input($_POST['tag']);
+
+            if ($val->isSuccess()) {
+                try {
+                    $up = new Update($data, 'links');
+                    $up->editData($_GET['edit']);
+                    header("Location:panel");
+                    exit;
+                } catch (Exception $e) {
+                    echo 'Caught exception: ',  $e->getMessage(), "\n";
+                } 
+            }
+        }
+
+        if (isset($_GET['add'])) {
+            View::renderTemplate('components/modal.html', [
+                'header' => 'Add new item',
+                'action' => 'add'
+            ]); 
+        }
+        
         View::renderTemplate('home/panel.html', [
             'showLinks' => $showLinks
         ]); 

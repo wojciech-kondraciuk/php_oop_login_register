@@ -2,35 +2,58 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add new link</h5>
+          <h5 class="modal-title" id="exampleModalLabel">{{ header }}</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="/panel" method="post" class="needs-validation" novalidate>
+        <form method="post" class="needs-validation" novalidate>
           <div class="modal-body">
           <div class="form-group">
             <label for="validationCustom01" class="form-label">Link</label>
-            <input type="text" class="form-control" id="validationCustom01" name="link" required>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="validationCustom01" 
+              name="link" 
+              value="{{ items.link }}"
+              required
+            >
             <div class="valid-feedback">Looks good!</div>
             <div class="invalid-feedback">Feel the field</div>
           </div>
           <div class="form-group">
             <label for="validationCustom02" class="form-label">Name</label>
-            <input type="text" pattern="[a-zA-Z ]+" class="form-control" id="validationCustom02" name="name" required>
+            <input 
+              type="text" 
+              pattern="[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ ]+" 
+              class="form-control" 
+              id="validationCustom02" 
+              name="name"
+              value="{{ items.name }}"
+              required
+            >
             <div class="invalid-feedback">Please enter on alphabets only.</div>
-            <div class="valid-feedback">Looks good!</div>
+            <div class="valid-feedback">Ok!</div>
           </div>
           <div class="form-group">
             <label for="validationCustom03" class="form-label">Tag</label>
-            <input type="text" pattern="[a-zA-Z ]+" class="form-control" id="validationCustom03" name="tag" required>
-            <div class="invalid-feedback">Please enter on alphabets only.</div>
-            <div class="valid-feedback">Looks good!</div>
+            <input 
+              type="text" 
+              pattern="[a-zA-Z ]+" 
+              class="form-control" 
+              id="validationCustom03" 
+              name="tag" 
+              value="{{ items.tag }}"
+              required
+            >
+            <div class="invalid-feedback">Please enter on alphabets only without polish symbols.</div>
+            <div class="valid-feedback">Ok!</div>
           </div>
           </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button class="btn btn-primary" type="submit" name="submit">Save</button>
+              <button class="btn btn-primary" type="submit" name="{{ action }}">Save</button>
             </div>
         </form>
       </div>
