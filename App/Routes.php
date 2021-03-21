@@ -21,12 +21,9 @@ echo $twig->render('components/header.html',[
 $router->respondWithController('GET', '/register', 'Register@index');
 $router->respondWithController('POST', '/register', 'Register@index');
 
-$router->respondWithController('GET', '/verify_email', 'verify@index');
+$router->respondWithController('GET', '/verify_email', 'Verify@index');
 
-$router->respond('GET', '/', function () {
-    View::renderTemplate('index.html');
-});
-
+$router->respondWithController('GET', '/', 'Home@index');
 
 
 

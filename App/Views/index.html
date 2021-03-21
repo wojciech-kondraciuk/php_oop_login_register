@@ -4,8 +4,27 @@
 
 {% block body %}
   <div class="jumbotron">
-        <h1>To be continued</h1>
-        <p>Bootstrap is the most popular HTML, CSS, and JS framework for developing
-        responsive, mobile-first projects on the web.</p>
+        <h1>LinkPedia</h1>
+        <p>Application for saving interesting links found on the internet. Adding new resources only after <a href="/login">logging in</a></p>
   </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">link</th>
+        <th scope="col">name</th>
+        <th scope="col">tag</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for item in showLinks %}
+      <tr>
+        <th scope="row">{{ item.id }}</th>
+        <td><a href="{{ item.link }}" target="_blank">{{ item.link }}</a></td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.tag }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

@@ -53,6 +53,13 @@ class Panel extends \Core\Controller {
             header("Location:panel");
             exit;
         }
+        if (isset($_GET['add'])) {
+            View::renderTemplate('components/modal.html', [
+                'header' => 'Add new item',
+                'action' => 'add'
+            ]); 
+        }
+
         //delete
         if (isset($_GET['delete'])) {
             $del = new Delete('links');
@@ -60,18 +67,8 @@ class Panel extends \Core\Controller {
             header("Location:panel");
             exit;
         }
+        
         //edit
-        if (isset($_GET['edit'])) {
-            $row = new Display('links');
-            $update = $row->getRecordByID($_GET['edit']);
-
-            View::renderTemplate('components/modal.html', [
-                'header' => 'Edit item',
-                'items' => $update,
-                'action' => 'edit'
-            ]); 
-        }
-
         if (isset($_POST['edit'])) {
             $data['link'] = $val->test_input($_POST['link']);
             $data['name'] = $val->test_input($_POST['name']);
@@ -88,14 +85,17 @@ class Panel extends \Core\Controller {
                 } 
             }
         }
+        if (isset($_GET['edit'])) {
+            $row = new Display('links');
+            $update = $row->getRecordByID($_GET['edit']);
 
-        if (isset($_GET['add'])) {
             View::renderTemplate('components/modal.html', [
-                'header' => 'Add new item',
-                'action' => 'add'
+                'header' => 'Edit item',
+                'items' => $update,
+                'action' => 'edit'
             ]); 
         }
-        
+
         View::renderTemplate('home/panel.html', [
             'showLinks' => $showLinks
         ]); 
