@@ -6,11 +6,13 @@
   <div class="d-flex justify-content-between">
     <h1 class="mb-20">Links</h1>
     <form class="form-inline">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" id="search">
+      <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
     </form>
   </div>
 </div>
+</div>
+<div class="table-responsive">
 <table class="table table-striped">
     <thead>
       <tr>
@@ -22,25 +24,31 @@
       </tr>
     </thead>
     <tbody>
-    {% for item in showLinks %}
-      <tr>
-        <th scope="row">{{ item.id }}</th>
-        <td><a href="{{ item.link }}" target="_blank">{{ item.link }}</a></td>
-        <td>{{ item.name }}</td>
-        <td>{{ item.tag }}</td>
-        <td>
-            <a 
-              onClick="return confirm('Are you sure you want to delete?')" 
-              class="btn btn-danger" 
-              href="/panel?delete={{ item.id }}"
-              >Del</a>
-              <a 
-              href="/panel?edit={{ item.id }}"
-              class="btn btn-success edit"
-              >Edit</a>
-        </td>
-      </tr>
-    {% endfor %}
+      {% if showLinks %}
+        {% for item in showLinks %}
+          <tr class="item">
+            <th scope="row">{{ item.id }}</th>
+            <td><a href="{{ item.link }}" target="_blank">{{ item.link }}</a></td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.tag }}</td>
+            <td>
+                <a 
+                  onClick="return confirm('Are you sure you want to delete?')" 
+                  class="btn btn-danger" 
+                  href="/panel?delete={{ item.id }}"
+                  >Del</a>
+                  <a 
+                  href="/panel?edit={{ item.id }}"
+                  class="btn btn-success edit"
+                  >Edit</a>
+            </td>
+          </tr>
+        {% endfor %}
+      {% else %}
+          <tr>
+            <td colspan="5"><div class="center">no links</div></td>
+          </tr>
+      {% endif %}
       <tr>
         <td colspan="5">
             <a 
@@ -51,4 +59,5 @@
       </tr>
     </tbody>
 </table>
+</div>
 {% endblock %}

@@ -10,3 +10,9 @@ ul {
     margin-bottom: 20px;
 }
 
+.center {
+    text-align: center;
+    width: 100%;
+    font-weight: bold;
+    color: #ff0000;
+}

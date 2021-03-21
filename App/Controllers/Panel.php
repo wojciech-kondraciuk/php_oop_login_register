@@ -9,6 +9,7 @@ use App\Models\Add;
 use App\Models\Delete;
 use App\Models\Update;
 use App\Helpers\Validation;
+use App\Helpers\Alerts;
 
 class Panel extends \Core\Controller {
 
@@ -63,9 +64,12 @@ class Panel extends \Core\Controller {
         //delete
         if (isset($_GET['delete'])) {
             $del = new Delete('links');
-            $del->deleteById($_GET['delete']);
+            $result = $del->deleteById($_GET['delete']);
             header("Location:panel");
-            exit;
+            
+            if ($result) {
+                Alerts::successAlert("Success!","deleted");
+            }
         }
         
         //edit

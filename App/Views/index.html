@@ -7,24 +7,32 @@
         <h1>LinkPedia</h1>
         <p>Application for saving interesting links found on the internet. Adding new resources only after <a href="/login">logging in</a></p>
   </div>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">link</th>
-        <th scope="col">name</th>
-        <th scope="col">tag</th>
-      </tr>
-    </thead>
-    <tbody>
-    {% for item in showLinks %}
-      <tr>
-        <th scope="row">{{ item.id }}</th>
-        <td><a href="{{ item.link }}" target="_blank">{{ item.link }}</a></td>
-        <td>{{ item.name }}</td>
-        <td>{{ item.tag }}</td>
-      </tr>
-    {% endfor %}
-    </tbody>
-</table>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">link</th>
+          <th scope="col">name</th>
+          <th scope="col">tag</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if showLinks %}
+        {% for item in showLinks %}
+          <tr>
+            <th scope="row">{{ item.id }}</th>
+            <td><a href="{{ item.link }}" target="_blank">{{ item.link }}</a></td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.tag }}</td>
+          </tr>
+        {% endfor %}
+      {% else %}
+          <tr>
+            <td colspan="5"><div class="center">no links</div></td>
+          </tr>
+      {% endif %}
+      </tbody>
+  </table>
+</div>
 {% endblock %}
