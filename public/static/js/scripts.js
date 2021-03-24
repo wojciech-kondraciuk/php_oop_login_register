@@ -42,5 +42,20 @@ function searchTask() {
 }
 
 
-inputSearch.addEventListener('input', searchTask);
+if (inputSearch) {
+    inputSearch.addEventListener('input', searchTask);
+}
 
+let count = 2;
+$("#button").click(function () {
+    count = count + 2;
+    $("#tab").hide().load("http://boilerplate.pl/ajax.php", {
+        commentNewCount: count
+    }).fadeIn('1000');
+});
+
+$(document).ready(function () {
+    $("#tab").load("http://boilerplate.pl/ajax.php", {
+        commentNewCount: 2
+    });
+});

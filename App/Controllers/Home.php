@@ -12,11 +12,7 @@ class Home extends \Core\Controller {
      */
 
     public function index() {
-        $show = new Display('links');
-        $showLinks = $show->getAllData();
-
-        View::renderTemplate('index.html', [
-            'showLinks' => $showLinks
-        ]);
-    }
+        View::renderTemplate('index.html');
+    }  
 }
+?>

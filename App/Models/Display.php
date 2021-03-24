@@ -21,6 +21,12 @@ class Display extends \Core\Model {
         $query->execute();
         return $query->fetchAll();
     }
+
+    public function getAllDataByLimit($limit): array {
+        $query = static::getDB()->prepare("SELECT * FROM $this->tablename ORDER BY `id` ASC LIMIT $limit");
+        $query->execute();
+        return $query->fetchAll();
+    }
 	
     public function getLastRecordDESC(): array {
         $query = static::getDB()->prepare("SELECT * FROM $this->tablename ORDER BY 'id' DESC LIMIT 1");

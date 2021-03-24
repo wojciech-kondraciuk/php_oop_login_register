@@ -26,7 +26,6 @@ $router->respondWithController('GET', '/verify_email', 'Verify@index');
 $router->respondWithController('GET', '/', 'Home@index');
 
 
-
 if (isset($_SESSION['username'])) {
     $router->respondWithController('GET', '/panel', 'Panel@index');
     $router->respondWithController('POST', '/panel', 'Panel@index');

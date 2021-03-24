@@ -17,7 +17,7 @@
           <th scope="col">tag</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="tab">
         {% if showLinks %}
         {% for item in showLinks %}
           <tr>
@@ -34,5 +34,8 @@
       {% endif %}
       </tbody>
   </table>
+  <div class="text-center"> 
+    <button id="button" class="btn btn-primary">Load more</button>
+  </div><br>
 </div>
 {% endblock %}
