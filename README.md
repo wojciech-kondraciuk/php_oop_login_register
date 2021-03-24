@@ -7,6 +7,7 @@ Application for saving interesting links found on the internet.
 * Email confirmation
 * Validation form
 * Add, Edit, Delete link
+* Loading resources with Ajax
 
 ## Use:
 * Bootstrap

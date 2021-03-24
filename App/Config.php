@@ -20,19 +20,19 @@ class Config
      * Database name
      * @var string
      */
-    const DB_NAME = 'boilerplate';
+    const DB_NAME = 'deis_link';
 
     /**
      * Database user
      * @var string
      */
-    const DB_USER = 'root';
+    const DB_USER = 'deis_link';
 
     /**
      * Database password
      * @var string
      */
-    const DB_PASSWORD = '';
+    const DB_PASSWORD = '1#l3,Q@58@2h@PB';
 
     /**
      * Show or hide error messages on screen
